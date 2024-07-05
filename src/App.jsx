@@ -8,6 +8,7 @@ import {
   Routes
 } from "react-router-dom";
 import About from './components/about/About';
+import Footer from './components/footer/Footer'
 
 function App() {
   const [mode, setMode] = useState('light')
@@ -30,7 +31,9 @@ function App() {
             <Route path='/about' element={<About mode={mode} />} />
             <Route path='/' element={<TextForm heading="Enter a Text " mode={mode} />} />
           </Routes>
+            <Footer mode={mode}/>
         </div>
+        
       </Router>
     </>
   )
