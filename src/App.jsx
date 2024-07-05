@@ -1,29 +1,37 @@
-import { useState } from 'react';
+import { useState } from 'react'
 import './App.css'
 import Navbar from './components/navbar/Navbar'
+import TextForm from './components/textform/TextForm'
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes
+} from "react-router-dom";
+import About from './components/about/About';
 
 function App() {
-  const [text, setText] = useState('')
-
-  const toUppercase = ()=>{
-    let newText = text.toUpperCase();
-    setText(newText);
+  const [mode, setMode] = useState('light')
+  const toggleMode = () => {
+    if (mode === 'light') {
+      setMode('dark');
+      // document.body.style.backgroundColor = '#181818'
+      document.body.style.backgroundColor = 'black'
+    } else {
+      setMode('light');
+      document.body.style.backgroundColor = 'white'
+    }
   }
-  const handleOnChange = (event)=>{
-    setText(event.target.value);
-  }
-
-
   return (
     <>
-      <Navbar />
-      <div className="container">
-        <h2 className='mb-4'>Enter texts</h2>
-        <div className="mb-3">
-          <textarea className="form-control" value={text} onChange={handleOnChange} rows="8"></textarea>
+      <Router>
+        <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} />
+        <div className="container my-3">
+          <Routes>
+            <Route path='/about' element={<About mode={mode} />} />
+            <Route path='/' element={<TextForm heading="Enter a Text " mode={mode} />} />
+          </Routes>
         </div>
-        <button className="btn btn-dark" onClick={toUppercase}>Conevert to Uppercase</button>
-      </div>
+      </Router>
     </>
   )
 }
