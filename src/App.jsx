@@ -31,9 +31,8 @@ function App() {
             <Route path='/about' element={<About mode={mode} />} />
             <Route path='/' element={<TextForm heading="Enter a Text " mode={mode} />} />
           </Routes>
-            <Footer mode={mode}/>
         </div>
-        
+          <Footer mode={mode}/>
       </Router>
     </>
   )
